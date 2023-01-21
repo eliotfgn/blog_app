@@ -1,3 +1,5 @@
+import 'package:blog/models/user_request.dart';
+import 'package:blog/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -14,16 +16,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
 
   _register(String email, String username, String password) async {
-    // var data = await UserService.register(email, username, password);
+    print("registering");
+    RegisterRequest payload = RegisterRequest(
+      email: email,
+      username: username,
+      password: password,
+    );
+    var res;
+    try {
+      res = await UserService.register(payload);
+    } catch (e) {
+      print(e);
+    }
+    print(res);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xfff5f5f5),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
+    return Scaffold(
+      backgroundColor: const Color(0xfff5f5f5),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
@@ -50,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                           )),
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 20,

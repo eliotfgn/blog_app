@@ -1,3 +1,4 @@
+import 'package:blog/screens/login_screen.dart';
 import 'package:blog/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,8 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
         scaffoldBackgroundColor: const Color(0xfff5f5f5),
       ),
-      home: const RegisterScreen(),
+      home: const LoginScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

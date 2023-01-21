@@ -1,6 +1,8 @@
 import 'package:blog/models/user_request.dart';
 import 'package:blog/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -14,9 +16,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isLoading = false;
 
   _register(String email, String username, String password) async {
-    print("registering");
+    print('registering');
+    _isLoading = true;
     RegisterRequest payload = RegisterRequest(
       email: email,
       username: username,
@@ -26,9 +30,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       res = await UserService.register(payload);
     } catch (e) {
-      print(e);
+      Fluttertoast.showToast(
+        msg: 'An unexpected problem occurs!',
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
-    print(res);
+
+    if (res != null) {
+      Fluttertoast.showToast(msg: 'You have been registered');
+    }
   }
 
   @override
@@ -95,7 +108,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: _isLoading
+                    ? const SpinKitPulse(
+                        color: Colors.red,
+                      )
+                    : null,
+              ),
               ElevatedButton(
                 onPressed: () {
                   _register(
@@ -105,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   );
                 },
                 child: const Text("Register"),
-              )
+              ),
             ],
           ),
         ),

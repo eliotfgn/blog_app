@@ -50,83 +50,92 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: const Color(0xfff5f5f5),
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 200,
-              ),
-              const Text(
-                "Welcome back!",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Form(
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                          hintText: "Enter your email",
-                          fillColor: Color(0xfff5f5f5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          )),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: _usernameController,
-                      decoration: const InputDecoration(
-                          hintText: "Enter your username",
-                          fillColor: Color(0xfff5f5f5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          )),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: _passwordController,
-                      decoration: const InputDecoration(
-                          hintText: "Enter your password",
-                          fillColor: Color(0xfff5f5f5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white),
-                          )),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                  ],
+                const Text(
+                  "Welcome back!",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: _isLoading
-                    ? const SpinKitPulse(
-                        color: Colors.red,
-                      )
-                    : null,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _register(
-                    _emailController.text,
-                    _usernameController.text,
-                    _passwordController.text,
-                  );
-                },
-                child: const Text("Register"),
-              ),
-            ],
+                const SizedBox(
+                  height: 40,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 30),
+                  child: Image.asset("assets/images/register-page-image.png"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Form(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(
+                            hintText: "Enter your email",
+                            fillColor: Color(0xfff5f5f5),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            )),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                            hintText: "Enter your username",
+                            fillColor: Color(0xfff5f5f5),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            )),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                            hintText: "Enter your password",
+                            fillColor: Color(0xfff5f5f5),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            )),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: _isLoading
+                      ? const SpinKitPulse(
+                          color: Colors.red,
+                        )
+                      : null,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    _register(
+                      _emailController.text,
+                      _usernameController.text,
+                      _passwordController.text,
+                    );
+                  },
+                  child: const Text("Register"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

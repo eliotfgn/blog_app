@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:blog/models/auth_models.dart';
 import 'package:blog/screens/register_screen.dart';
+import 'package:blog/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,6 +19,23 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _hidePassword = true;
+  bool _loading = false;
+
+  _login(String email, String password) async {
+    LoginRequest request = LoginRequest(email, password);
+
+    LoginResponse? res;
+
+    try {
+      res = await UserService.signin(request);
+    } catch (e) {
+      Fluttertoast.showToast(msg: 'An error occurred!');
+    }
+
+    if (res != null) {
+      Fluttertoast.showToast(msg: 'Authenticated!');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +116,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Sign in"),
+                  onPressed: () {
+                    _login(_emailController.text, _passwordController.text);
+                  },
+                  child: !_loading
+                      ? const Text("Sign in")
+                      : const SpinKitDualRing(color: Colors.white),
                 ),
                 const SizedBox(
                   height: 30,

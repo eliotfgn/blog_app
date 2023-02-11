@@ -108,4 +108,13 @@ class TaskService {
 
     return started;
   }
+
+  static Future<List<dynamic>> findAllNotStarted() async {
+    List<Task> tasks = await getAll();
+    List<Task> notStarted = [];
+
+    notStarted = tasks.where((element) => element.beginedAt == null).toList();
+
+    return notStarted;
+  }
 }

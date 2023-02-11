@@ -1,3 +1,4 @@
+import 'package:blog/models/new_task.dart';
 import 'package:blog/models/task.dart';
 import 'package:blog/services/storage_service.dart';
 import 'package:dio/dio.dart';
@@ -41,5 +42,20 @@ class TaskService {
       print(e.response?.data);
     }
     return null;
+  }
+
+  static Future<bool> create(NewTask task) async {
+    bool created = false;
+
+    try {
+      dynamic res = await Dio().post('${Constants.baseUrl}todos',
+          data: task.toJson(),
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+      created = true;
+    } on DioError catch (e) {
+      print(e);
+    }
+
+    return created;
   }
 }

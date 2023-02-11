@@ -1,3 +1,4 @@
+import 'package:blog/models/new_task.dart';
 import 'package:blog/services/task_service.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: TextButton(
             onPressed: () {
-              TaskService.getById("9df032c5-6b18-4499-9a1f-1e16e4350048");
+              TaskService.create(NewTask(
+                  "Learn Flutter",
+                  "Flutter is the best mobile framework",
+                  "high",
+                  "2023-06-06 00:00:00"));
             },
             child: Text("Click"),
           ),

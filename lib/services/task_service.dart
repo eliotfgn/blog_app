@@ -91,7 +91,7 @@ class TaskService {
     return updated;
   }
 
-  static Future<List<dynamic>> findAllCompleted(String state) async {
+  static Future<List<dynamic>> findAllCompleted() async {
     List<Task> tasks = await getAll();
     List<Task> completed = [];
 
@@ -100,5 +100,12 @@ class TaskService {
     return completed;
   }
 
+  static Future<List<dynamic>> findAllStarted() async {
+    List<Task> tasks = await getAll();
+    List<Task> started = [];
 
+    started = tasks.where((element) => element.beginedAt != null).toList();
+
+    return started;
+  }
 }

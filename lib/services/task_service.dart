@@ -134,4 +134,19 @@ class TaskService {
 
     return late;
   }
+
+  static Future<List<dynamic>> filterByPriority(String priority) async {
+    List<Task> tasks = [];
+    try {
+      Response<List<dynamic>> res = await Dio().get(
+          '${Constants.baseUrl}todos?priority=$priority',
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+      res.data?.forEach((element) {
+        tasks.add(Task.fromJson(element));
+      });
+    } on DioError catch (e) {
+      print(e);
+    }
+    return tasks;
+  }
 }

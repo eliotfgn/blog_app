@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import '../utils/constants.dart';
 
 class TaskService {
-  static getAll() async {
+  static Future<List<Task>> getAll() async {
     var token = StorageService.getToken();
     List<Task> tasks = [];
     try {

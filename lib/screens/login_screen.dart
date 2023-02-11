@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:blog/models/auth_models.dart';
+import 'package:blog/screens/home_screen.dart';
 import 'package:blog/screens/register_screen.dart';
 import 'package:blog/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     LoginResponse? res;
-    await Future.delayed(const Duration(seconds: 2));
     setState(() {
       _loading = false;
     });
@@ -40,6 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
           msg: 'An error occurred!',
           textColor: Colors.blue,
           backgroundColor: Colors.red);
+    }
+
+    if (res != null) {
+      // user successfully authenticated
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }
 

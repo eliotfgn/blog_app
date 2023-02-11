@@ -66,6 +66,8 @@ flutter:
     - assets/images/register-page-image.png
     - assets/images/login-page-image.png
     - assets/images/starting-image.png
+    - assets/images/home-hero.png
+    - assets/images/home-hero-blob.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

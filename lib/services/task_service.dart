@@ -117,4 +117,21 @@ class TaskService {
 
     return notStarted;
   }
+
+  static Future<List<dynamic>> findLatelyFinished(String state) async {
+    List<Task> tasks = await getAll();
+    List<Task> late = [];
+
+    late = tasks.where((element) {
+      final DateTime deadline = DateTime.parse(element.deadlineAt);
+      if (element.finishedAt != null) {
+        final DateTime endDate = DateTime.parse(element.finishedAt ?? "");
+        return endDate.isAfter(deadline);
+      } else {
+        return deadline.isBefore(DateTime.now());
+      }
+    }).toList();
+
+    return late;
+  }
 }

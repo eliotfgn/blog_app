@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: TextButton(
             onPressed: () {
-              TaskService.getAll();
+              TaskService.getById("9df032c5-6b18-4499-9a1f-1e16e4350048");
             },
             child: Text("Click"),
           ),

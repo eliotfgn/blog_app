@@ -14,12 +14,12 @@ class LoginRequest {
 }
 
 class LoginResponse {
-  String? accessToken;
-  String? userId;
-  String? email;
-  String? username;
+  String accessToken;
+  String userId;
+  String email;
+  String username;
 
-  LoginResponse({this.accessToken, this.userId, this.username, this.email});
+  LoginResponse({required this.accessToken, required this.userId, required this.username, required this.email,});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         accessToken: json['accessToken'],

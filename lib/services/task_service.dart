@@ -58,4 +58,20 @@ class TaskService {
 
     return created;
   }
+
+  static Future<bool> beginTask(String id) async {
+    bool updated = false;
+
+    try {
+      dynamic res = await Dio().patch('${Constants.baseUrl}todos/$id',
+          data: {"begined_at": DateTime.now().toString()},
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+      updated = true;
+    } on DioError catch (e) {
+      print(e);
+    }
+
+    return updated;
+  }
 }

@@ -20,11 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: TextButton(
             onPressed: () {
-              TaskService.create(NewTask(
-                  "Learn Flutter",
-                  "Flutter is the best mobile framework",
-                  "high",
-                  "2023-06-06 00:00:00"));
+              TaskService.beginTask("9df032c5-6b18-4499-9a1f-1e16e4350048");
             },
             child: Text("Click"),
           ),

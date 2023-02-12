@@ -1,5 +1,6 @@
 import 'package:blog/models/new_task.dart';
 import 'package:blog/services/task_service.dart';
+import 'package:blog/widgets/stat_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,10 +67,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Text(
                     "Your stats",
                     style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.primary),
                   ),
+                ),
+                Row(
+                  children: const [
+                    Expanded(
+                      child: StatCard(
+                        title: "Total tasks",
+                        value: 17,
+                      ),
+                    ),
+                    Expanded(
+                      child: StatCard(
+                        title: "Completed tasks",
+                        value: 5,
+                      ),
+                    )
+                  ],
                 )
               ],
             ),

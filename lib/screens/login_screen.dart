@@ -9,6 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String routeName = "/login";
+
   const LoginScreen({Key? key}) : super(key: key);
 
   @override

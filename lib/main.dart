@@ -28,7 +28,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
               primarySwatch: createMaterialColor(const Color(0xfff459507))),
-          scaffoldBackgroundColor: const Color(0xfff5f5f5),
+          scaffoldBackgroundColor: Colors.white,
           fontFamily: GoogleFonts.quicksand().fontFamily),
       home: const LoginScreen(),
       debugShowCheckedModeBanner: false,

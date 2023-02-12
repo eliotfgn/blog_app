@@ -6,6 +6,8 @@ import 'package:blog/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'screens/tasks_screen.dart';
+
 void main() {
   runApp(const App());
 }
@@ -17,12 +19,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: StorageService.isAuthenticated()
-          ? HomeScreen.routeName
-          : LoginScreen.routeName,
+//      initialRoute: StorageService.isAuthenticated()
+//          ? HomeScreen.routeName
+//          : LoginScreen.routeName,
+      initialRoute: TasksScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen()
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        TasksScreen.routeName: (context) => const TasksScreen(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

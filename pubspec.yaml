@@ -69,6 +69,13 @@ flutter:
     - assets/images/starting-image.png
     - assets/images/home-hero.png
     - assets/images/home-hero-blob.png
+  fonts:
+    - family: AvenirNext
+      fonts:
+        - asset: assets/fonts/avenir-next/AvenirNext-Regular.otf
+        - asset: assets/fonts/avenir-next/AvenirNext-Bold.otf
+          weight: 700
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

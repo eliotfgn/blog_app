@@ -1,6 +1,7 @@
 import 'package:blog/models/new_task.dart';
 import 'package:blog/services/task_service.dart';
 import 'package:blog/widgets/stat_card.dart';
+import 'package:blog/widgets/stat_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -87,7 +88,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const StatTile(
+                  title: "Not started",
+                  value: 5,
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                const StatTile(
+                  title: "Pending",
+                  value: 4,
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                const StatTile(
+                  title: "Lately completed",
+                  value: 8,
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
               ],
             ),
           ),

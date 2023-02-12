@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.5,
-          title: const Text(
+          title: Text(
             "ToDo",
             style: StyleConstants.appBarTitle,
           ),

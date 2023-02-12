@@ -26,10 +26,11 @@ class App extends StatelessWidget {
       },
       title: 'Flutter Demo',
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: createMaterialColor(const Color(0xfff459507))),
-          scaffoldBackgroundColor: Colors.white,
-          fontFamily: GoogleFonts.quicksand().fontFamily),
+        colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: createMaterialColor(const Color(0xfff459507))),
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: "AvenirNext",
+      ),
       home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );

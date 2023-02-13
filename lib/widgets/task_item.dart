@@ -34,7 +34,7 @@ class _TaskItemState extends State<TaskItem> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
           color: Colors.white,
@@ -48,6 +48,7 @@ class _TaskItemState extends State<TaskItem> {
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 8,
@@ -84,7 +85,10 @@ class _TaskItemState extends State<TaskItem> {
             const SizedBox(
               height: 10,
             ),
-            Text(widget.description)
+            Text(
+              widget.description,
+              textAlign: TextAlign.start,
+            )
           ],
         ));
   }

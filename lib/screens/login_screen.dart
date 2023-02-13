@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:blog/models/auth_models.dart';
 import 'package:blog/screens/home_screen.dart';
 import 'package:blog/screens/register_screen.dart';
+import 'package:blog/screens/tasks_screen.dart';
 import 'package:blog/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -46,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (res != null) {
       // user successfully authenticated
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      Navigator.pushReplacementNamed(context, TasksScreen.routeName);
     }
   }
 

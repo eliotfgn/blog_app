@@ -22,7 +22,7 @@ class App extends StatelessWidget {
 //      initialRoute: StorageService.isAuthenticated()
 //          ? HomeScreen.routeName
 //          : LoginScreen.routeName,
-      initialRoute: TasksScreen.routeName,
+      initialRoute: LoginScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),

@@ -1,5 +1,6 @@
 import 'package:blog/utils/constants.dart';
 import 'package:blog/widgets/category_pill.dart';
+import 'package:blog/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -30,6 +31,9 @@ class _TasksScreenState extends State<TasksScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(
+              height: 30,
+            ),
             SizedBox(
               height: 45,
               child: ListView(
@@ -42,6 +46,9 @@ class _TasksScreenState extends State<TasksScreen> {
                   CategoryPill(category: "Low", isSelected: current == "Low"),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 30,
             ),
           ],
         ),

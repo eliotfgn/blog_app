@@ -19,10 +19,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-//      initialRoute: StorageService.isAuthenticated()
-//          ? HomeScreen.routeName
-//          : LoginScreen.routeName,
-      initialRoute: LoginScreen.routeName,
+      initialRoute: StorageService.isAuthenticated()
+          ? HomeScreen.routeName
+          : LoginScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),

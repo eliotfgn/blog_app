@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.1.2
   flutter_spinkit:
   just_audio:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,15 @@ flutter:
     - assets/images/register-page-image.png
     - assets/images/login-page-image.png
     - assets/images/starting-image.png
+    - assets/images/home-hero.png
+    - assets/images/home-hero-blob.png
+  fonts:
+    - family: AvenirNext
+      fonts:
+        - asset: assets/fonts/avenir-next/AvenirNext-Regular.otf
+        - asset: assets/fonts/avenir-next/AvenirNext-Bold.otf
+          weight: 700
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

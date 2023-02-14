@@ -13,6 +13,7 @@ class StorageService {
     await _pref.setString("userId", profileInfos.userId);
     await _pref.setString("username", profileInfos.username);
     await _pref.setString("token", profileInfos.token);
+    await _pref.setBool("isAuthenticated", true);
   }
 
   static String getId() {
@@ -31,5 +32,12 @@ class StorageService {
     _init();
     String? token = _pref.getString("token");
     return token ?? "";
+  }
+
+  static bool isAuthenticated() {
+    _init();
+    bool? authenticated = _pref.getBool('isAuthenticated');
+
+    return authenticated ?? false;
   }
 }

@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'screens/tasks_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
 }
 

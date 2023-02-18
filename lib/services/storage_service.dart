@@ -9,6 +9,7 @@ class StorageService {
   }
 
   static saveUserInfos(UserProfile profileInfos) async {
+    _init();
     await _pref.setString("userId", profileInfos.userId);
     await _pref.setString("username", profileInfos.username);
     await _pref.setString("token", profileInfos.token);
@@ -16,21 +17,25 @@ class StorageService {
   }
 
   static String getId() {
+    _init();
     String? id = _pref.getString("userId");
     return id ?? "";
   }
 
   static String getUsername() {
+    _init();
     String? username = _pref.getString("username");
     return username ?? "";
   }
 
   static String getToken() {
+    _init();
     String? token = _pref.getString("token");
     return token ?? "";
   }
 
   static bool isAuthenticated() {
+    _init();
     bool? authenticated = _pref.getBool('isAuthenticated');
 
     return authenticated ?? false;

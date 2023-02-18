@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/constants.dart';
+import '../widgets/bottom_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: true,
         ),
+        bottomNavigationBar: const BottomNavigation(0),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15),

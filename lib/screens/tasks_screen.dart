@@ -6,6 +6,7 @@ import 'package:blog/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 
 import '../models/task.dart';
+import '../widgets/bottom_navigation.dart';
 
 class TasksScreen extends StatefulWidget {
   static const String routeName = '/tasks';
@@ -46,6 +47,7 @@ class _TasksScreenState extends State<TasksScreen> {
         ),
         centerTitle: true,
       ),
+      bottomNavigationBar: const BottomNavigation(1),
       body: SingleChildScrollView(
         child: Column(
           children: [

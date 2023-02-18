@@ -36,51 +36,55 @@ class _TasksScreenState extends State<TasksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return Stack(children: [
+      Scaffold(
         backgroundColor: Colors.white,
-        elevation: 0.2,
-        title: Text(
-          "My tasks",
-          style: StyleConstants.appBarTitle,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0.2,
+          title: Text(
+            "My tasks",
+            style: StyleConstants.appBarTitle,
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: const BottomNavigation(1),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              height: 45,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  CategoryPill(category: "All", isSelected: current == "All"),
-                  CategoryPill(category: "High", isSelected: current == "High"),
-                  CategoryPill(
-                      category: "Medium", isSelected: current == "Medium"),
-                  CategoryPill(category: "Low", isSelected: current == "Low"),
-                ],
+        bottomNavigationBar: const BottomNavigation(1),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Column(
-              children: tasks
-                  .map((e) => TaskItem(
-                      title: e.title,
-                      description: e.description,
-                      priority: e.priority))
-                  .toList(),
-            )
-          ],
+              SizedBox(
+                height: 45,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    CategoryPill(category: "All", isSelected: current == "All"),
+                    CategoryPill(
+                        category: "High", isSelected: current == "High"),
+                    CategoryPill(
+                        category: "Medium", isSelected: current == "Medium"),
+                    CategoryPill(category: "Low", isSelected: current == "Low"),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: tasks
+                    .map((e) => TaskItem(
+                        title: e.title,
+                        description: e.description,
+                        priority: e.priority))
+                    .toList(),
+              )
+            ],
+          ),
         ),
       ),
-    );
+      const TasksScreen(),
+    ]);
   }
 }

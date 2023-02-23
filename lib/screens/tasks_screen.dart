@@ -2,6 +2,7 @@ import 'package:blog/services/storage_service.dart';
 import 'package:blog/services/task_service.dart';
 import 'package:blog/utils/constants.dart';
 import 'package:blog/widgets/category_pill.dart';
+import 'package:blog/widgets/task_details.dart';
 import 'package:blog/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +85,7 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
         ),
       ),
-      const TasksScreen(),
+      const TaskDetails(),
     ]);
   }
 }

@@ -85,7 +85,7 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
         ),
       ),
-      const TaskDetails(),
+      TaskDetails(),
     ]);
   }
 }

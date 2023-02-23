@@ -22,6 +22,9 @@ class _TasksScreenState extends State<TasksScreen> {
   String current = "All";
   List<Task> tasks = [];
 
+  late Task task = Task("", "", "", "", "", "", "");
+  bool _showTask = false;
+
   init() async {
     List<Task> allTasks = await TaskService.getAll();
     setState(() {
@@ -75,17 +78,40 @@ class _TasksScreenState extends State<TasksScreen> {
               ),
               Column(
                 children: tasks
-                    .map((e) => TaskItem(
-                        title: e.title,
-                        description: e.description,
-                        priority: e.priority))
+                    .map((e) => GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              task.title = e.title;
+                              task.description = e.description;
+                              task.id = e.id;
+                              task.deadlineAt = e.deadlineAt;
+                              task.beginedAt = e.beginedAt;
+                              task.finishedAt = e.finishedAt;
+                              task.priority = e.priority;
+                              _showTask = true;
+                            });
+                          },
+                          child: TaskItem(
+                              title: e.title,
+                              description: e.description,
+                              priority: e.priority),
+                        ))
                     .toList(),
               )
             ],
           ),
         ),
       ),
-      TaskDetails(),
+      _showTask
+          ? TaskDetails(
+              task: task,
+              close: () {
+                setState(() {
+                  print('Closing');
+                  _showTask = false;
+                });
+              })
+          : const SizedBox(),
     ]);
   }
 }

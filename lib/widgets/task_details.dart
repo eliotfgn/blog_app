@@ -50,24 +50,41 @@ class TaskDetails extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        ElevatedButton(
-                          onPressed: () async {
-                            final task_ = task;
-                            if (task_ != null) {
-                              TaskService.beginTask(task_.id);
-                              beginningController.text =
-                                  DateTime.now().toString();
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 16),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                          ),
-                          child: const Text('Start task'),
-                        ),
+                        task?.beginedAt == null
+                            ? ElevatedButton(
+                                onPressed: () async {
+                                  final task_ = task;
+                                  if (task_ != null) {
+                                    TaskService.beginTask(task_.id);
+                                    beginningController.text =
+                                        DateTime.now().toString();
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                  ),
+                                ),
+                                child: const Text('Start task'),
+                              )
+                            : ElevatedButton(
+                                onPressed: () async {
+                                  final task_ = task;
+                                  if (task_ != null) {
+                                    TaskService.finishTask(task_.id);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(fontSize: 16),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
+                                  ),
+                                ),
+                                child: const Text('Finish task'),
+                              ),
                         const SizedBox(
                           height: 30,
                         ),

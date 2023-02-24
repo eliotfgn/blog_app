@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../services/task_service.dart';
+
 class TaskDetails extends StatelessWidget {
   Task? task;
   dynamic close;
@@ -49,7 +51,14 @@ class TaskDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final task_ = task;
+                            if (task_ != null) {
+                              TaskService.beginTask(task_.id);
+                              beginningController.text =
+                                  DateTime.now().toString();
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 16),
                             shape: const RoundedRectangleBorder(

@@ -1,4 +1,5 @@
 import 'package:blog/models/new_task.dart';
+import 'package:blog/models/task.dart';
 import 'package:blog/services/task_service.dart';
 import 'package:blog/widgets/stat_card.dart';
 import 'package:blog/widgets/stat_tile.dart';
@@ -18,6 +19,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _totalTasks = 0;
+  int _completedTasks = 0;
+  int _pendingTasks = 0;
+  int _overdueTasks = 0;
+  int _notStartedTasks = 0;
+
+  init() async {
+    List<Task> allTasks = await TaskService.getAll();
+    List completedTasks = await TaskService.findAllCompleted();
+    List notStartedTasks = await TaskService.findAllNotStarted();
+    List lateTasks = await TaskService.findLatelyFinished();
+    setState(() {
+      _totalTasks = allTasks.length;
+      _completedTasks = completedTasks.length;
+      _notStartedTasks = notStartedTasks.length;
+      _overdueTasks = lateTasks.length;
+      _pendingTasks =
+          _totalTasks - _completedTasks - _notStartedTasks - _overdueTasks;
+    });
+  }
+
+  @override
+  void initState() async {
+    super.initState();
+    await init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,17 +104,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
                       child: StatCard(
                         title: "Total tasks",
-                        value: 17,
+                        value: _totalTasks,
                       ),
                     ),
                     Expanded(
                       child: StatCard(
                         title: "Completed tasks",
-                        value: 5,
+                        value: _completedTasks,
                       ),
                     )
                   ],
@@ -94,23 +122,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                const StatTile(
+                StatTile(
                   title: "Not started",
-                  value: 5,
+                  value: _notStartedTasks,
                 ),
                 const SizedBox(
                   height: 25,
                 ),
-                const StatTile(
+                StatTile(
                   title: "Pending",
-                  value: 4,
+                  value: _pendingTasks,
                 ),
                 const SizedBox(
                   height: 25,
                 ),
-                const StatTile(
-                  title: "Lately completed",
-                  value: 8,
+                StatTile(
+                  title: "Overdue tasks",
+                  value: _overdueTasks,
                 ),
                 const SizedBox(
                   height: 25,

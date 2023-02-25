@@ -118,7 +118,7 @@ class TaskService {
     return notStarted;
   }
 
-  static Future<List<dynamic>> findLatelyFinished(String state) async {
+  static Future<List<dynamic>> findLatelyFinished() async {
     List<Task> tasks = await getAll();
     List<Task> late = [];
 

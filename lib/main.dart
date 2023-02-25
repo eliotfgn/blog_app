@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:blog/screens/create_task_screen.dart';
 import 'package:blog/screens/home_screen.dart';
 import 'package:blog/screens/login_screen.dart';
 import 'package:blog/screens/register_screen.dart';
@@ -8,7 +11,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/tasks_screen.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
 }
@@ -28,6 +41,7 @@ class App extends StatelessWidget {
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         TasksScreen.routeName: (context) => const TasksScreen(),
+        CreateTaskScreen.routeName: (context) => CreateTaskScreen(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

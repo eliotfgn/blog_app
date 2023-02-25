@@ -1,6 +1,7 @@
 import 'package:blog/models/new_task.dart';
 import 'package:blog/screens/tasks_screen.dart';
 import 'package:blog/services/task_service.dart';
+import 'package:blog/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -289,6 +290,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: const BottomNavigation(2),
     );
   }
 }

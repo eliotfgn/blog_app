@@ -6,28 +6,45 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../services/task_service.dart';
 
-class TaskDetails extends StatelessWidget {
+class TaskDetails extends StatefulWidget {
   Task? task;
   dynamic close;
 
   TaskDetails({Key? key, this.task, this.close}) : super(key: key);
 
   @override
+  State<TaskDetails> createState() => _TaskDetailsState();
+}
+
+class _TaskDetailsState extends State<TaskDetails> {
+  late bool taskStarted;
+  late bool completed;
+
+  @override
+  void initState() {
+    super.initState();
+    taskStarted =
+        widget.task?.beginedAt != "" || widget.task?.beginedAt != null;
+    completed =
+        widget.task?.finishedAt != "" && widget.task?.finishedAt != null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final TextEditingController titleController =
-        TextEditingController(text: task?.title);
+        TextEditingController(text: widget.task?.title);
     final TextEditingController descriptionController =
-        TextEditingController(text: task?.description);
+        TextEditingController(text: widget.task?.description);
     final TextEditingController beginningController =
-        TextEditingController(text: task?.beginedAt ?? "-");
+        TextEditingController(text: widget.task?.beginedAt ?? "-");
     final TextEditingController deadlineController =
-        TextEditingController(text: task?.deadlineAt ?? "-");
+        TextEditingController(text: widget.task?.deadlineAt ?? "-");
     bool editDescription = true;
     bool editTitle = true;
 
     final _formKey = GlobalKey<FormState>();
     return GestureDetector(
-      onTap: close,
+      onTap: widget.close,
       child: Container(
         color: Colors.black.withOpacity(0.5),
         width: MediaQuery.of(context).size.width,
@@ -50,14 +67,21 @@ class TaskDetails extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        task?.beginedAt == null
+                        !taskStarted
                             ? ElevatedButton(
                                 onPressed: () async {
-                                  final task_ = task;
+                                  final task_ = widget.task;
                                   if (task_ != null) {
-                                    TaskService.beginTask(task_.id);
+                                    bool done =
+                                        await TaskService.beginTask(task_.id);
                                     beginningController.text =
                                         DateTime.now().toString();
+                                    if (done) {
+                                      setState(() {
+                                        taskStarted = true;
+                                        widget.close();
+                                      });
+                                    }
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -69,22 +93,51 @@ class TaskDetails extends StatelessWidget {
                                 ),
                                 child: const Text('Start task'),
                               )
-                            : ElevatedButton(
-                                onPressed: () async {
-                                  final task_ = task;
-                                  if (task_ != null) {
-                                    TaskService.finishTask(task_.id);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  textStyle: const TextStyle(fontSize: 16),
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
+                            : !completed
+                                ? ElevatedButton(
+                                    onPressed: () async {
+                                      final task_ = widget.task;
+                                      bool completed = false;
+                                      if (task_ != null) {
+                                        completed =
+                                            await TaskService.finishTask(
+                                                task_.id);
+                                      }
+                                      if (completed) {
+                                        setState(() {
+                                          this.completed = true;
+                                          widget.close();
+                                        });
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      textStyle: const TextStyle(fontSize: 16),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                      ),
+                                    ),
+                                    child: const Text('Finish task'),
+                                  )
+                                : Container(
+                                    width: double.infinity,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(50),
+                                        border: const Border.fromBorderSide(
+                                            BorderSide(
+                                                color: Colors.green,
+                                                width: 2))),
+                                    child: const Center(
+                                        child: Text(
+                                      "Completed",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.green),
+                                    )),
                                   ),
-                                ),
-                                child: const Text('Finish task'),
-                              ),
                         const SizedBox(
                           height: 30,
                         ),

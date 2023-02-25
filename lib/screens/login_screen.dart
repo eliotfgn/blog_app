@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (res != null) {
       // user successfully authenticated
-      Navigator.pushReplacementNamed(context, TasksScreen.routeName);
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }
 

@@ -41,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    await init();
+    init();
   }
 
   @override

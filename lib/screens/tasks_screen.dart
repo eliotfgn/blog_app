@@ -92,9 +92,16 @@ class _TasksScreenState extends State<TasksScreen> {
                             });
                           },
                           child: TaskItem(
-                              title: e.title,
-                              description: e.description,
-                              priority: e.priority),
+                            title: e.title,
+                            description: e.description,
+                            priority: e.priority,
+                            id: e.id,
+                            onDelete: () {
+                              setState(() {
+                                tasks.remove(e);
+                              });
+                            },
+                          ),
                         ))
                     .toList(),
               )

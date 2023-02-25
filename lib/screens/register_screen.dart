@@ -6,6 +6,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
+  static const String routeName = "/register";
+
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override

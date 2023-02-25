@@ -149,4 +149,25 @@ class TaskService {
     }
     return tasks;
   }
+
+  static Future<bool> delete(String id) async {
+    bool deleted = false;
+
+    try {
+      Response<dynamic> res = await Dio().delete(
+          '${Constants.baseUrl}todos/$id',
+          options: Options(
+            headers: {
+              'Authorization': 'Bearer $token',
+            },
+          ));
+      if (res.statusCode == 200) {
+        deleted = true;
+      }
+    } on DioError catch (e) {
+      print(e);
+    }
+
+    return deleted;
+  }
 }

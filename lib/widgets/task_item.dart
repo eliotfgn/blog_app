@@ -1,15 +1,20 @@
+import 'package:blog/services/task_service.dart';
 import 'package:flutter/material.dart';
 
 class TaskItem extends StatefulWidget {
   final String title;
   final String description;
   final String priority;
+  final String id;
+  final dynamic onDelete;
 
   const TaskItem(
       {Key? key,
       required this.title,
       required this.description,
-      required this.priority})
+      required this.priority,
+      required this.id,
+      required this.onDelete})
       : super(key: key);
 
   @override
@@ -89,10 +94,19 @@ class _TaskItemState extends State<TaskItem> {
                   ),
                 ),
                 const Spacer(),
-                const Text("Jan 01",
-                    style: TextStyle(
-                      fontSize: 14,
-                    )),
+                GestureDetector(
+                  onTap: () async {
+                    bool deleted = false;
+                    deleted = await TaskService.delete(widget.id);
+                    if (deleted) {
+                      widget.onDelete();
+                    }
+                  },
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                )
               ],
             ),
             const SizedBox(

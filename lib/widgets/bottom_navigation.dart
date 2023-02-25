@@ -1,4 +1,5 @@
 import 'package:blog/screens/create_task_screen.dart';
+import 'package:blog/screens/notifications_screen.dart';
 import 'package:blog/screens/tasks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -28,6 +29,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
             break;
           case 2:
             Navigator.pushReplacementNamed(context, CreateTaskScreen.routeName);
+            break;
+          case 3:
+            Navigator.pushReplacementNamed(
+                context, NotificationsScreen.routeName);
             break;
         }
       },

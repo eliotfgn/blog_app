@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:blog/screens/create_task_screen.dart';
 import 'package:blog/screens/home_screen.dart';
 import 'package:blog/screens/login_screen.dart';
+import 'package:blog/screens/notifications_screen.dart';
 import 'package:blog/screens/register_screen.dart';
 import 'package:blog/services/storage_service.dart';
 import 'package:blog/utils/utils.dart';
@@ -42,6 +43,8 @@ class App extends StatelessWidget {
         LoginScreen.routeName: (context) => const LoginScreen(),
         TasksScreen.routeName: (context) => const TasksScreen(),
         CreateTaskScreen.routeName: (context) => CreateTaskScreen(),
+        NotificationsScreen.routeName: (context) => const NotificationsScreen(),
+        RegisterScreen.routeName: (context) => const RegisterScreen(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

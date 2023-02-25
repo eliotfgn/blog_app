@@ -17,6 +17,19 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
+  Color taskColor() {
+    switch (widget.priority) {
+      case "low":
+        return Colors.yellow.shade500;
+      case "medium":
+        return Color(0xff79C7B4);
+      case "high":
+        return Colors.red;
+      default:
+        return Colors.green;
+    }
+  }
+
   String description = "";
 
   @override
@@ -72,7 +85,7 @@ class _TaskItemState extends State<TaskItem> {
                   width: 13,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Colors.yellow,
+                    color: taskColor(),
                   ),
                 ),
                 const Spacer(),

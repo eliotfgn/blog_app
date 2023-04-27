@@ -83,7 +83,9 @@ class TaskService {
           data: {"finished_at": DateTime.now().toString()},
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 
-      updated = true;
+      if (res.statusCode == 200) {
+        updated = true;
+      }
     } on DioError catch (e) {
       print(e);
     }
@@ -154,13 +156,13 @@ class TaskService {
     bool deleted = false;
 
     try {
-      Response<dynamic> res = await Dio().delete(
-          '${Constants.baseUrl}todos/$id',
-          options: Options(
-            headers: {
-              'Authorization': 'Bearer $token',
-            },
-          ));
+      Response<dynamic> res =
+          await Dio().delete('${Constants.baseUrl}todos/$id',
+              options: Options(
+                headers: {
+                  'Authorization': 'Bearer $token',
+                },
+              ));
       if (res.statusCode == 200) {
         deleted = true;
       }
@@ -169,5 +171,9 @@ class TaskService {
     }
 
     return deleted;
+  }
+
+  update(Task task) async {
+    bool updated = false;
   }
 }

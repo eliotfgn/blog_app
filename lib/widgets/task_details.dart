@@ -23,10 +23,26 @@ class _TaskDetailsState extends State<TaskDetails> {
   @override
   void initState() {
     super.initState();
-    taskStarted =
-        widget.task?.beginedAt != "" || widget.task?.beginedAt != null;
-    completed =
-        widget.task?.finishedAt != "" && widget.task?.finishedAt != null;
+
+    if (widget.task?.beginedAt != null) {
+      if (widget.task?.beginedAt != "") {
+        taskStarted = true;
+      } else {
+        taskStarted = false;
+      }
+    } else {
+      taskStarted = false;
+    }
+
+    if (widget.task?.finishedAt != null) {
+      if (widget.task?.finishedAt != "") {
+        completed = true;
+      } else {
+        completed = false;
+      }
+    } else {
+      completed = false;
+    }
   }
 
   @override
@@ -97,15 +113,16 @@ class _TaskDetailsState extends State<TaskDetails> {
                                 ? ElevatedButton(
                                     onPressed: () async {
                                       final task_ = widget.task;
-                                      bool completed = false;
+                                      bool completed_ = false;
                                       if (task_ != null) {
-                                        completed =
+                                        completed_ =
                                             await TaskService.finishTask(
                                                 task_.id);
                                       }
-                                      if (completed) {
+                                      if (completed_) {
                                         setState(() {
-                                          this.completed = true;
+                                          completed = true;
+                                          print(completed_);
                                           widget.close();
                                         });
                                       }

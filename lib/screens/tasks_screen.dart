@@ -40,85 +40,76 @@ class _TasksScreenState extends State<TasksScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.2,
-          title: Text(
-            "My tasks",
-            style: StyleConstants.appBarTitle,
-          ),
-          centerTitle: true,
+        elevation: 0.2,
+        title: Text(
+          "My tasks",
+          style: StyleConstants.appBarTitle,
         ),
-        bottomNavigationBar: const BottomNavigation(1),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
+        centerTitle: true,
+      ),
+      bottomNavigationBar: const BottomNavigation(1),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+              height: 45,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  CategoryPill(category: "All", isSelected: current == "All"),
+                  CategoryPill(category: "High", isSelected: current == "High"),
+                  CategoryPill(
+                      category: "Medium", isSelected: current == "Medium"),
+                  CategoryPill(category: "Low", isSelected: current == "Low"),
+                ],
               ),
-              SizedBox(
-                height: 45,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    CategoryPill(category: "All", isSelected: current == "All"),
-                    CategoryPill(
-                        category: "High", isSelected: current == "High"),
-                    CategoryPill(
-                        category: "Medium", isSelected: current == "Medium"),
-                    CategoryPill(category: "Low", isSelected: current == "Low"),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Column(
-                children: tasks
-                    .map((e) => GestureDetector(
-                          onTap: () {
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Column(
+              children: tasks
+                  .map((e) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            task.title = e.title;
+                            task.description = e.description;
+                            task.id = e.id;
+                            task.deadlineAt = e.deadlineAt;
+                            task.beginedAt = e.beginedAt;
+                            task.finishedAt = e.finishedAt;
+                            task.priority = e.priority;
+
+                            showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    TaskDetails(task: task, close: () {}));
+                          });
+                        },
+                        child: TaskItem(
+                          title: e.title,
+                          description: e.description,
+                          priority: e.priority,
+                          id: e.id,
+                          onDelete: () {
                             setState(() {
-                              task.title = e.title;
-                              task.description = e.description;
-                              task.id = e.id;
-                              task.deadlineAt = e.deadlineAt;
-                              task.beginedAt = e.beginedAt;
-                              task.finishedAt = e.finishedAt;
-                              task.priority = e.priority;
-                              _showTask = true;
+                              tasks.remove(e);
                             });
                           },
-                          child: TaskItem(
-                            title: e.title,
-                            description: e.description,
-                            priority: e.priority,
-                            id: e.id,
-                            onDelete: () {
-                              setState(() {
-                                tasks.remove(e);
-                              });
-                            },
-                          ),
-                        ))
-                    .toList(),
-              )
-            ],
-          ),
+                        ),
+                      ))
+                  .toList(),
+            )
+          ],
         ),
       ),
-      _showTask
-          ? TaskDetails(
-              task: task,
-              close: () {
-                setState(() {
-                  print('Closing');
-                  _showTask = false;
-                });
-              })
-          : const SizedBox(),
-    ]);
+    );
   }
 }
